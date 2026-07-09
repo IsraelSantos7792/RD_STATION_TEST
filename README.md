@@ -17,6 +17,20 @@ bin/rails db:create db:migrate
 bundle exec rails server
 ```
 
+### Com frontend (Next.js)
+
+Se for usar o frontend em Next.js na porta `3000`, suba o Rails na porta `5050`:
+
+```bash
+bundle exec rails server -p 5050
+```
+
+No frontend, configure:
+
+```bash
+NEXT_PUBLIC_API_BASE_URL=http://localhost:5050
+```
+
 Sidekiq (em outro terminal):
 
 ```bash
@@ -98,7 +112,7 @@ O arquivo `Rd Station test.postman_collection.json` contém uma collection com:
 - `DELETE /cart/:product_id`
 - `GET /products`
 
-Configure a variável `BASE` como, por exemplo, `http://localhost:3000/` (com a barra no final).
+Configure a variável `BASE` como, por exemplo, `http://localhost:5050/` (com a barra no final) se estiver usando o frontend, ou `http://localhost:3000/` se subir o Rails na porta padrão.
 
 RD_STATION_TEST
 
