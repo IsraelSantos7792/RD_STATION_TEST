@@ -32,6 +32,14 @@ RSpec.describe "/products", type: :request do
       get product_url(product), as: :json
       expect(response).to be_successful
     end
+
+    it "returns 404 with a standardized error envelope when the product does not exist" do
+      get product_url(-1), as: :json
+
+      expect(response).to have_http_status(:not_found)
+      body = JSON.parse(response.body)
+      expect(body["error"]).to eq("Resource not found")
+    end
   end
 
   describe "POST /create" do
